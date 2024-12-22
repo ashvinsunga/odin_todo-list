@@ -3,11 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="/src/style.css">
+    <title>To Do</title>
 </head>
 <body>
+    <div class="container">
+        <header class="header">
+            <h1 class="header-text">TO DO</h1>
+        </header>
+        <main class="main-content">
+            <section class="project-list-container" aria-label="Project List">
+                <h2 class="project-list-title">Projects</h2>
+                <button class="new-project-btn" aria-label="Add Project"> Add Project</button>
+              <!-- <div id="list-input-container"></div> -->
+              <ul id="project-list" role="list"></ul>
+            </section>
+            <section class="task-list-container">
+                <h2 class="task-list-title">Tasks</h2>
+                <button class="new-task-btn" aria-label="Add Task">Add Task</button>
+              <ul id="task-list" role="list"></ul>
+            </section>        
+              <!-- <div class="render-content"></div> -->
+          </main> 
+    </div>
     
-    <script src="index.js" type="module"></script>
 </body>
 </html>

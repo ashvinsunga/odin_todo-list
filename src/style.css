@@ -1,0 +1,20 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --line-height: 1.5;
+}
+
+body {
+    background-color: #80B649;
+}
+
+.container {
+    width: 97vw;
+    height: 95vh;
+    margin: 15px auto;
+    background-color: #4980B6;
+}
