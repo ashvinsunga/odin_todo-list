@@ -1,36 +1,37 @@
-class todoList {
-    priorityList = ["high", "moderate", "low"]
+export class TodoList {
+    priorityList = ["high", "moderate", "low"];
     isCompleted = false;
-    constructor(title, description, dueDate, priority, notes, checklist){
+    constructor(title, description, dueDate, priority, notes, checkList){
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
         this.notes = notes;
-        this.checklist = checklist;
+        this.checkList = checkList;
     }
 
     addItemToCheckList(itemId){
-        this.checklist.push(itemId)
+        this.checkList.push(itemId)
         return true
     }
 
     removeItemToCheckList(itemId){
-        this.checklist.splice(itemId,1)
-        return this.checklist
+        this.checkList.splice(itemId,1)
+        return this.checkList
     }
 
     toggleComplete(){
         return this.isCompleted = !this.isCompleted
     }
 
+    setDetailPriority(priority) {
+        return this.priority = priority
+    }
+
     showDetailPreview(){
         return `${this.title}-${this.dueDate}`
     }
 
-    setDetailPriority(priority) {
-        return this.priority = priority
-    }
 
     showCompleteDetail(){
         return {
@@ -39,7 +40,7 @@ class todoList {
             dueDate: this.dueDate,
             priority: this.priority,
             notes: this.notes,
-            checklist: this.checklist,
+            checkList: this.checkList,
         }
     }
 }
