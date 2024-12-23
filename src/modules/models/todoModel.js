@@ -1,13 +1,12 @@
 export class TodoList {
-    priorityList = ["high", "moderate", "low"];
     isCompleted = false;
-    constructor(title, description, dueDate, priority, notes, checkList){
+    constructor(title, description, dueDate, priority, notes, projectName){
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.priority = priority;
         this.notes = notes;
-        this.checkList = checkList;
+        this.projectName = projectName;
     }
 
     addItemToCheckList(itemId){

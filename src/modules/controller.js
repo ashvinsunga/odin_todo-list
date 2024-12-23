@@ -1,5 +1,7 @@
 import { format } from "date-fns";
 
+import { openDialog } from "./views/modalView";
+
 import { Project } from "./models/projectModel";
 import { TodoList } from './models/todoModel'
 
@@ -8,7 +10,7 @@ import { renderTodos } from "./views/todoView";
 
 
 
-const app = (() => {
+export const app = (() => {
     const projectCollection = [];
 
     const showProjects = () => projectCollection;
@@ -22,6 +24,14 @@ const app = (() => {
         addProject
     }
 })();
+
+function handleAddTodoButtonClick(){
+    const addTodoButton = document.querySelector('[new-task-btn]')
+
+    addTodoButton.addEventListener('click', () => {
+        openDialog()
+    })
+}
 
 
 
@@ -52,5 +62,5 @@ app.addProject(projectTwo)
 app.addProject(projectThree)
 renderProjectList(app.showProjects())
 renderTodos(projectThree)
-
+handleAddTodoButtonClick()
 }
