@@ -7,6 +7,7 @@ import { renderProjectList } from "./views/projectView";
 import { renderTodos } from "./views/todoView";
 
 
+
 const app = (() => {
     const projectCollection = [];
 
@@ -51,4 +52,5 @@ app.addProject(projectTwo)
 app.addProject(projectThree)
 renderProjectList(app.showProjects())
 renderTodos(projectThree)
+
 }

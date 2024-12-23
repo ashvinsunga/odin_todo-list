@@ -27,15 +27,15 @@ main {
         ul {
             list-style: none;
         }
-        [projectItem],
-        [todoItem]{
+        .project-item,
+        .todo-item{
             margin-top: 10px;
             line-height: var(--line-height);
         }
-        [projectItem] {
+        .project-item {
             background-color: lightsalmon;
         }
-        [todoItem] {
+        .todo-item {
             background-color: lightgoldenrodyellow;
         }
     }
@@ -47,7 +47,7 @@ main {
     align-items: center;
 }
 
-[newButtons] {
+.new-buttons {
     background-color: #008CBA;
     color: white;
     padding: 5px 20px;
@@ -57,7 +57,7 @@ main {
     font-size: 16px;
   }
   
-  [newButtons]:hover {
+  .new-task-btn:hover {
     background-color: #007B9E;
     color: #E0F7FF;
   }
@@ -68,3 +68,54 @@ main {
     padding: 10px;
     background-color: whitesmoke;
 }
+
+#todo-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    .todo-item{
+        padding: 15px;
+        border-radius: 10px;
+    }
+    .todo-item:hover {
+        box-shadow: 1px 1px 1px black;
+    }
+}
+
+.todo-item{
+    display: flex;
+    justify-content: space-between;
+}
+
+.todo-item-controls {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    div {
+        cursor: pointer;
+        width: 2rem;
+        height: 2rem;
+        display: block;
+        margin: 0 auto;
+        background-size: contain;
+        background-repeat: no-repeat;
+        opacity: 0.5;
+    }
+    div:hover {
+        opacity: 1;
+    }
+}
+
+.todo-item-edit-btn{
+    background-image: url('asset/icon/edit.svg');
+}
+
+.todo-item-delete-btn{
+    background-image: url('asset/icon/delete.svg');
+}
+
+/* Modal */
+
+.blurred-background {
+    filter: blur(5px);
+  }

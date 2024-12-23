@@ -4,7 +4,7 @@ export function renderProjectList(projects){
 
     projects.map(project => {
         const projectItem = document.createElement('li')
-        projectItem.setAttribute('projectItem',"")
+        projectItem.classList.add('project-item')
         projectItem.textContent = project.name
         projectList.appendChild(projectItem);
     })
