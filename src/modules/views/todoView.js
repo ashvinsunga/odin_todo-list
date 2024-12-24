@@ -1,7 +1,13 @@
 import { app } from "../controller";
+import { createInputWithLabel, createPriorityOption } from "./modalView";
+import { formatDate } from "../dateUtil";
+import { openTodoDetailsDialog } from "./modalView";
+
+// RENDER THE TODOS ON THE RIGHT PANE //
 
 export function renderTodos(project) {
     const todoList = document.getElementById('todo-list');
+    todoList.innerHTML ="";
     const todos = project.todos
     // console.log(project)
     todos.map(todo => {
@@ -19,18 +25,20 @@ export function renderTodos(project) {
         // due date
         const todoItemDueDate = document.createElement('p')
         todoItemDueDate.classList.add('todo-item-duedate')
-        todoItemDueDate.textContent = `Due on: ${todo.dueDate}`;
+        todoItemDueDate.textContent = `Due on: ${formatDate(todo.dueDate)}`;
 
         // controls
         const todoItemControls = document.createElement('div')
         todoItemControls.classList.add('todo-item-controls');
 
         const editBtn = document.createElement('div')
+        editBtn.setAttribute('todo-item-edit-btn',"")
         editBtn.classList.add('todo-item-edit-btn')
-        editBtn.addEventListener('click', () => alert("Edit Button"))
+        editBtn.addEventListener('click', () => openTodoDetailsDialog(todo))
 
     
         const deleteBtn = document.createElement('div')
+        deleteBtn.setAttribute('todo-item-delete-btn',"")
         deleteBtn.classList.add('todo-item-delete-btn')
         deleteBtn.addEventListener('click', () => alert("Delete Button"))
 
@@ -43,42 +51,11 @@ export function renderTodos(project) {
 
         todoItem.appendChild(todoItemInformation);
         todoItem.appendChild(todoItemControls)
-        todoItem.addEventListener('click', () => alert("ITEM Clicked!"))
         todoList.appendChild(todoItem)
     })
 }
 
-
-export function createInputWithLabel(text, inputType, inputClass, isRequired = false, isTextArea = false) {
-    const label = document.createElement('label');
-    label.textContent = text;
-    
-    let input;
-    if (isTextArea) {
-      input = document.createElement('textarea');
-      input.rows = 3; 
-      input.cols = 20;
-    } else {
-      input = document.createElement('input');
-      input.type = inputType;
-    }
-    
-    input.classList.add(inputClass);
-    input.setAttribute(inputClass,"")
-    if (isRequired) {
-      input.setAttribute('required', '');
-    }
-    label.appendChild(input);
-    
-    return label;
-  }
-
-  function createPriorityOption(value) {
-    const option = document.createElement('option');
-    option.value = value;
-    option.textContent = value;
-    return option;
-  }
+// CREATE PROJECT SELECTION ELEMENT //
 
   function createProjectSelect() {
     const label = document.createElement('label');
@@ -98,6 +75,8 @@ export function createInputWithLabel(text, inputType, inputClass, isRequired = f
   
     return label;
   }
+
+// CREATE FORM FOR TODO //
 
 export function createToDoForm() {
     const form = document.createElement('form');
@@ -121,6 +100,7 @@ export function createToDoForm() {
     priorityLabel.textContent = 'Priority';
     const prioritySelect = document.createElement('select');
     prioritySelect.setAttribute('todo-priority-select',"")
+    prioritySelect.setAttribute('required',"")
     prioritySelect.classList.add('todo-priority-select');
     priorityLabel.appendChild(prioritySelect);
     form.appendChild(priorityLabel);
@@ -144,6 +124,7 @@ export function createToDoForm() {
     submitBtn.type = 'submit';
     submitBtn.value = 'SAVE';
     submitBtn.classList.add('todo-submit-btn');
+    submitBtn.setAttribute('todo-submit-btn',"");
     form.appendChild(submitBtn);
   
     form.addEventListener('submit', (e) => {

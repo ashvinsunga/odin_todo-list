@@ -1,3 +1,7 @@
+import { app } from "../controller";
+import { renderTodos } from "../views/todoView";
+import { saveData } from "./storageModel";
+
 export class TodoList {
     isCompleted = false;
     constructor(title, description, dueDate, priority, notes, projectName){
@@ -42,4 +46,44 @@ export class TodoList {
             checkList: this.checkList,
         }
     }
+}
+
+
+
+export function updateTodoDetails(todo) {
+    const formContainer = document.querySelector('.todo-form-container');
+  
+    const title = formContainer.querySelector('[todo-title-input]');
+    const description = formContainer.querySelector('[todo-description-input]');
+    const dueDate = formContainer.querySelector('[todo-dueDate-input]');
+    const notes = formContainer.querySelector('[todo-notes-input]');
+    const priority = formContainer.querySelector('[todo-priority-select]');
+    const projectName = formContainer.querySelector('[project-list-select]');
+  
+    const oldProjectName = todo.projectName;
+
+    todo.title = title.value
+    todo.description = description.value
+    todo.dueDate = dueDate.value
+    todo.notes = notes.value
+    todo.priority = priority.value
+    todo.projectName = projectName.value
+  
+    const oldProject = app.projectCollection.find(project => project.name === oldProjectName);
+    const newProject = app.projectCollection.find(project => project.name === todo.projectName);
+
+    if (oldProject && oldProjectName !== todo.project) {
+        oldProject.projectCollection = oldProject.showTodos().filter(t => t !== todo);
+    }
+
+    if (newProject && (!oldProject || !oldProject.showTodos().includes(todo))) {
+        newProject.addTodo(todo);
+    }
+
+    const currentProjectTitle = document.querySelector('[project-title-text]').textContent;
+    if (currentProjectTitle === oldProjectName) {
+        renderTodos(oldProject);
+    }
+
+    saveData(app.showProjects());
 }
